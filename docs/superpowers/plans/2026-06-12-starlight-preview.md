@@ -507,6 +507,14 @@ cp -R docs/site/content/docs/contributing docs/site-starlight/src/content/docs/
 
 Expected: all four directories are copied recursively (including `reference/commands/`).
 
+Then remove the Fumadocs `meta.json` sidebar-ordering files — Starlight ignores them but they're dead weight in the new tree:
+
+```bash
+find docs/site-starlight/src/content/docs -name 'meta.json' -delete
+```
+
+Expected: removes 3 files (`contributing/meta.json`, `reference/meta.json`, `reference/commands/meta.json`).
+
 - [ ] **Step 2: Copy the seven simple how-to files**
 
 ```bash
