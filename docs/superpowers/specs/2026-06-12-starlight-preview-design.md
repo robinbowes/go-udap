@@ -170,11 +170,11 @@ into the content:
 
 ```js
 sidebar: [
-  { label: 'Tutorials',     autogenerate: { directory: 'tutorials' } },
-  { label: 'How-to guides', autogenerate: { directory: 'how-to' } },
-  { label: 'Concepts',      autogenerate: { directory: 'concepts' } },
-  { label: 'Reference',     autogenerate: { directory: 'reference' } },
-  { label: 'Contributing',  autogenerate: { directory: 'contributing' } },
+  { label: 'Tutorials',     items: [{ autogenerate: { directory: 'tutorials' } }] },
+  { label: 'How-to guides', items: [{ autogenerate: { directory: 'how-to' } }] },
+  { label: 'Concepts',      items: [{ autogenerate: { directory: 'concepts' } }] },
+  { label: 'Reference',     items: [{ autogenerate: { directory: 'reference' } }] },
+  { label: 'Contributing',  items: [{ autogenerate: { directory: 'contributing' } }] },
 ],
 ```
 

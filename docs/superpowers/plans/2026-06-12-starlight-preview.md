@@ -249,13 +249,15 @@ Edit `docs/site-starlight/astro.config.mjs`. Replace the empty `sidebar: []` lin
 
 ```js
       sidebar: [
-        { label: 'Tutorials',     autogenerate: { directory: 'tutorials' } },
-        { label: 'How-to guides', autogenerate: { directory: 'how-to' } },
-        { label: 'Concepts',      autogenerate: { directory: 'concepts' } },
-        { label: 'Reference',     autogenerate: { directory: 'reference' } },
-        { label: 'Contributing',  autogenerate: { directory: 'contributing' } },
+        { label: 'Tutorials',     items: [{ autogenerate: { directory: 'tutorials' } }] },
+        { label: 'How-to guides', items: [{ autogenerate: { directory: 'how-to' } }] },
+        { label: 'Concepts',      items: [{ autogenerate: { directory: 'concepts' } }] },
+        { label: 'Reference',     items: [{ autogenerate: { directory: 'reference' } }] },
+        { label: 'Contributing',  items: [{ autogenerate: { directory: 'contributing' } }] },
       ],
 ```
+
+Note: Starlight v0.39+ requires the `items: [{ autogenerate: ... }]` wrapper form; the older bare-`autogenerate` form on a sidebar group is no longer accepted and produces a startup error. This plan was updated to reflect the current API after implementation surfaced the requirement.
 
 The final file should look like:
 
@@ -272,11 +274,11 @@ export default defineConfig({
         { icon: 'github', label: 'GitHub', href: 'https://github.com/yo61/go-udap' },
       ],
       sidebar: [
-        { label: 'Tutorials',     autogenerate: { directory: 'tutorials' } },
-        { label: 'How-to guides', autogenerate: { directory: 'how-to' } },
-        { label: 'Concepts',      autogenerate: { directory: 'concepts' } },
-        { label: 'Reference',     autogenerate: { directory: 'reference' } },
-        { label: 'Contributing',  autogenerate: { directory: 'contributing' } },
+        { label: 'Tutorials',     items: [{ autogenerate: { directory: 'tutorials' } }] },
+        { label: 'How-to guides', items: [{ autogenerate: { directory: 'how-to' } }] },
+        { label: 'Concepts',      items: [{ autogenerate: { directory: 'concepts' } }] },
+        { label: 'Reference',     items: [{ autogenerate: { directory: 'reference' } }] },
+        { label: 'Contributing',  items: [{ autogenerate: { directory: 'contributing' } }] },
       ],
     }),
     mdx(),
