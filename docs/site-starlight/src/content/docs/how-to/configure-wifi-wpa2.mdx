@@ -1,0 +1,49 @@
+---
+title: Configure a Squeezebox for Wi-Fi with WPA2
+description: Wireless networking with WPA2-PSK authentication
+---
+
+## Goal
+
+Configure a Squeezebox to use Wi-Fi with WPA2-PSK.
+
+## Prerequisites
+
+- Device connected by Ethernet for the initial setup (Wi-Fi-first onboarding is tracked separately, see below)
+- Device in setup or init mode
+- go-udap installed and on PATH
+- Your Wi-Fi SSID and pre-shared key known
+- Your Lyrion Music Server's IP address known
+
+## Steps
+
+1. Download the [example config](/examples/wifi-wpa2.conf) and edit `wireless_SSID`, `wireless_wpa_psk`, and `server_address`.
+2. Discover the device (still over Ethernet): `go-udap discover`
+3. Apply: `go-udap set <mac> --config wifi-wpa2.conf --reboot`
+4. Unplug the Ethernet cable.
+
+## Verification
+
+After ~30 seconds (Wi-Fi association takes longer than wired), re-run `go-udap discover`. The device should appear with its DHCP-assigned Wi-Fi IP. If it doesn't, plug the Ethernet back in to recover and check the SSID/PSK values.
+
+## Example config
+
+[wifi-wpa2.conf](/examples/wifi-wpa2.conf)
+
+## Notes
+
+- `interface=0` selects wireless. The example config sets this
+  explicitly. On factory-fresh devices `go-udap set` will also infer
+  `interface=0` from `wireless_SSID` if you omit it (and report the
+  inference on stderr), but pinning it in the config removes any
+  ambiguity.
+- `wireless_wpa_mode=2` is WPA2; `wireless_wpa_mode=1` is WPA;
+  `wireless_wpa_mode=0` is WPA-mixed-mode.
+- WEP is also supported (`wireless_wep_on=1`, `wireless_wep_key=...`)
+  but is insecure; don't use it on networks you care about.
+
+## Wi-Fi-first onboarding (without Ethernet)
+
+Initial onboarding of a factory-state device over Wi-Fi (using the
+device's built-in ad-hoc network) is a separate procedure. See
+[Onboard over Wi-Fi using ad-hoc mode](./onboard-over-wifi-ad-hoc.mdx).
