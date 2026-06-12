@@ -1,0 +1,11 @@
+{
+  "title": "Reference",
+  "pages": [
+    "commands",
+    "global-flags",
+    "config-file-format",
+    "nvram-parameters",
+    "exit-codes",
+    "api"
+  ]
+}

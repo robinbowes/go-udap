@@ -1,0 +1,28 @@
+---
+title: reboot
+description: Reboot the device
+---
+
+```text
+go-udap reboot MAC [--timeout DURATION]
+```
+
+## What it does
+
+Sends `UCP_METHOD_RESET` (`0x0004`) to the device. The device reboots,
+which takes ~10 seconds during which it ignores all UDP traffic.
+
+`go-udap reboot` returns success once the request has been sent; it
+does NOT wait for the device to finish rebooting.
+
+## Flags
+
+| Flag | Default | Description |
+|---|---|---|
+| `--timeout DURATION` | `2s` | Operation timeout |
+
+## Exit codes
+
+- `0` — success
+- `1` — invalid MAC
+- `2` — device not found, or transport error
