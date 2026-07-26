@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.8](https://github.com/yo61/go-udap/compare/v2.4.7...v2.4.8) (2026-07-26)
+
+
+### Documentation
+
+* log decision to defer Dependabot pnpm-release-age retry to lastlight ([#181](https://github.com/yo61/go-udap/issues/181)) ([f1ec1f3](https://github.com/yo61/go-udap/commit/f1ec1f3cdb759ed073658bd2efe15bf52d2bb209))
+
 ## [2.4.7](https://github.com/yo61/go-udap/compare/v2.4.6...v2.4.7) (2026-07-22)
 
 
