@@ -13,7 +13,7 @@
         { "type": "perf", "section": "Performance Improvements" },
         { "type": "deps", "section": "Dependencies" },
         { "type": "revert", "section": "Reverts" },
-        { "type": "docs", "section": "Documentation" },
+        { "type": "docs", "hidden": true },
         { "type": "refactor", "section": "Code Refactoring" },
         { "type": "style", "hidden": true },
         { "type": "test", "hidden": true },
