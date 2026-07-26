@@ -10,3 +10,7 @@ overrides:
   # images.unoptimized disables the only consumer); force past
   # GHSA-f88m-g3jw-g9cj. Next declares ^0.34.5, so this overrides it.
   sharp@<0.35.0: ^0.35.0
+  # brace-expansion (via minimatch@3) is vulnerable to a DoS from
+  # unbounded expansion (GHSA-mh99-v99m-4gvg); force past it. 5.0.8
+  # keeps a CommonJS build so minimatch's require() still resolves.
+  brace-expansion@<5.0.8: ^5.0.8
