@@ -408,13 +408,20 @@ func (c *Client) recordDevice(d *Device) {
 // --bind-interface NAME flag. Errors if the interface does not exist,
 // is down, lacks an IPv4 address, or is not broadcast-capable.
 func NewClientForInterface(name string, logger Logger) (*Client, error) {
+	return newClientForInterfaceWithPort(name, Port, logger)
+}
+
+// newClientForInterfaceWithPort is NewClientForInterface with the bind
+// port injectable. Port 0 lets the OS pick a free ephemeral port — used
+// by tests so they don't collide with anything holding port 17784.
+func newClientForInterfaceWithPort(name string, port int, logger Logger) (*Client, error) {
 	ifs, err := EnumerateInterfaces()
 	if err != nil {
 		return nil, fmt.Errorf("enumerate interfaces: %w", err)
 	}
 	for _, iface := range ifs {
 		if iface.Name == name {
-			tr, err := NewUDPTransportOnInterface(iface, Port, logger)
+			tr, err := NewUDPTransportOnInterface(iface, port, logger)
 			if err != nil {
 				return nil, err
 			}

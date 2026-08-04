@@ -291,9 +291,11 @@ func TestNewClientForInterfaceAcceptsKnownName(t *testing.T) {
 	if err != nil || len(ifs) == 0 {
 		t.Skip("no usable interfaces")
 	}
-	c, err := NewClientForInterface(ifs[0].Name, NewNoOpLogger())
+	// Ephemeral port: this asserts the interface-name lookup and bind
+	// path, which the fixed UDAP port is not part of.
+	c, err := newClientForInterfaceWithPort(ifs[0].Name, 0, NewNoOpLogger())
 	if err != nil {
-		t.Fatalf("NewClientForInterface(%q): %v", ifs[0].Name, err)
+		t.Fatalf("newClientForInterfaceWithPort(%q): %v", ifs[0].Name, err)
 	}
 	defer c.Close()
 }
