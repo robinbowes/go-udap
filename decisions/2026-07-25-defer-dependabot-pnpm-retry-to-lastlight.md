@@ -3,7 +3,7 @@
 Do not build a go-udap-local fix for docs Dependabot PRs that fail on pnpm 11's
 `ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION`. Capture the requirement as a planned
 Last Light skill instead. Requirement recorded at
-`lastlight/docs/plans/dependabot-pnpm-release-age-retry.md`.
+`lastlight/docs/plans/dependabot-pnpm-release-age-retry/README.md`.
 
 ## Context
 
