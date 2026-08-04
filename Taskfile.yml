@@ -176,6 +176,11 @@ tasks:
       - rm -f {{.BINARY_NAME}}-linux-amd64 {{.BINARY_NAME}}-linux-arm64
       - rm -rf bin/ man/
       - rm -f coverage.out coverage.html
+      # .verify/ caches an extracted release archive; mocksbr/mocksbr is the
+      # pre-bin/ output path. Both are gitignored, so they linger unnoticed
+      # and turn up as stale packages in local syft/grype scans.
+      - rm -rf .verify/
+      - rm -f mocksbr/mocksbr
 
   run:
     desc: Build and print help (CLI is single-shot; pass args explicitly)
