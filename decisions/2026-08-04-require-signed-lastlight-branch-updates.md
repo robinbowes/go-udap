@@ -77,11 +77,18 @@ rerun-failed-jobs`, which that decision already anticipated needing
   that way remains unsigned. Repos enforcing `required_signatures` will need
   those PRs recreated or handed to a human.
 - GitHub's REST reference for `update-branch` does not explicitly document the
-  signing behaviour of the commit it creates. The behaviour is documented
-  generally ("all commits merged through the GitHub UI are signed with GitHub's
-  web-flow key") and every server-side commit in this repo's history is
-  `verified: true`, but the first Last Light PR using this path should be
-  checked rather than assumed.
+  signing behaviour of the commit it creates, so this was verified directly
+  rather than assumed. Running it against PRs #189 and #190 on 2026-08-04
+  produced:
+
+  ```
+  cbe3309c committer=GitHub <noreply@github.com> verified=true reason=valid
+  f64c7c62 committer=GitHub <noreply@github.com> verified=true reason=valid
+  ```
+
+  Both are `Merge branch 'main' into <branch>` — note the message differs from
+  a sandbox merge's `Merge remote-tracking branch 'origin/main' into <branch>`,
+  which makes the two mechanisms distinguishable in history after the fact.
 
 ## Supersedes
 
