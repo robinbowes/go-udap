@@ -2,11 +2,15 @@ package udap
 
 import "testing"
 
+// mustNewClient returns a client on an OS-assigned ephemeral port. These
+// tests only parse response bytes, so the port is irrelevant — but binding
+// the real UDAP port would race any other package's tests under
+// `go test ./...`, which runs packages concurrently.
 func mustNewClient(t *testing.T) *Client {
 	t.Helper()
-	c, err := NewClientWithLogger(NewNoOpLogger())
+	c, err := newClientWithPort(0, NewNoOpLogger())
 	if err != nil {
-		t.Fatalf("NewClientWithLogger: %v", err)
+		t.Fatalf("newClientWithPort: %v", err)
 	}
 	return c
 }

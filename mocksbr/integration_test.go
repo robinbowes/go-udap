@@ -145,7 +145,7 @@ func TestDiscoveryResponseIncludesUUID(t *testing.T) {
 	}
 
 	// Build a discovery request packet to feed into Receive.
-	client, _ := udap.NewClientWithLogger(udap.NewNoOpLogger())
+	client := udap.NewClientWithTransport(mocksbr.NewMockTransport(n), udap.NewNoOpLogger())
 	req := client.CreateAdvancedDiscoveryPacket()
 	client.Close()
 
@@ -170,7 +170,7 @@ func TestGetIPHandlerReturnsConfiguredIPs(t *testing.T) {
 		t.Fatalf("Add: %v", err)
 	}
 
-	client, _ := udap.NewClientWithLogger(udap.NewNoOpLogger())
+	client := udap.NewClientWithTransport(mocksbr.NewMockTransport(n), udap.NewNoOpLogger())
 	mac, _ := udap.ParseMAC("00:04:20:00:00:01")
 	dev := &udap.Device{MAC: mac}
 	req, err := client.CreateGetIPPacket(dev)
@@ -212,7 +212,7 @@ func TestGetIPHandlerHonoursDropGetIP(t *testing.T) {
 		t.Fatalf("Add: %v", err)
 	}
 
-	client, _ := udap.NewClientWithLogger(udap.NewNoOpLogger())
+	client := udap.NewClientWithTransport(mocksbr.NewMockTransport(n), udap.NewNoOpLogger())
 	mac, _ := udap.ParseMAC("00:04:20:00:00:01")
 	dev := &udap.Device{MAC: mac}
 	req, _ := client.CreateGetIPPacket(dev)
@@ -234,7 +234,7 @@ func TestGetUUIDHandlerReturnsConfiguredUUID(t *testing.T) {
 		t.Fatalf("Add: %v", err)
 	}
 
-	client, _ := udap.NewClientWithLogger(udap.NewNoOpLogger())
+	client := udap.NewClientWithTransport(mocksbr.NewMockTransport(n), udap.NewNoOpLogger())
 	mac, _ := udap.ParseMAC("00:04:20:00:00:01")
 	dev := &udap.Device{MAC: mac}
 	req, err := client.CreateGetUUIDPacket(dev)
@@ -274,7 +274,7 @@ func TestGetUUIDHandlerHonoursDropGetUUID(t *testing.T) {
 		t.Fatalf("Add: %v", err)
 	}
 
-	client, _ := udap.NewClientWithLogger(udap.NewNoOpLogger())
+	client := udap.NewClientWithTransport(mocksbr.NewMockTransport(n), udap.NewNoOpLogger())
 	mac, _ := udap.ParseMAC("00:04:20:00:00:01")
 	dev := &udap.Device{MAC: mac}
 	req, _ := client.CreateGetUUIDPacket(dev)

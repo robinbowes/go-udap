@@ -33,19 +33,36 @@ func TestNewClient(t *testing.T) {
 	}
 }
 
-func TestNewClientWithLogger(t *testing.T) {
+func TestNewClientWithPortRetainsLogger(t *testing.T) {
 	logger := &TestLogger{logs: make([]LogEntry, 0)}
 	client, err := newClientWithPort(0, logger)
 	if err != nil {
-		t.Fatalf("Failed to create new client with logger: %v", err)
+		t.Fatalf("newClientWithPort: %v", err)
 	}
 	defer client.Close()
 
-	if client == nil {
-		t.Fatal("Client should not be nil")
+	// Can't compare an interface to a concrete type directly, so assert
+	// the logger was carried through rather than which one it is.
+	if client.logger == nil {
+		t.Error("Client logger should not be nil")
 	}
+}
 
-	// Verify client was created with a logger (can't directly compare interface to concrete type)
+// TestNewClientWithLogger covers the constructor the CLI takes by
+// default (cli/discover.go, when neither --bind-interface nor
+// --all-interfaces is given). It binds the real UDAP port, so a bind
+// failure is tolerated the same way TestNewClientForAllInterfaces...
+// tolerates it — the port may be held by another process, or be
+// privileged. What is asserted is that a successful call returns a
+// usable client carrying the supplied logger.
+func TestNewClientWithLogger(t *testing.T) {
+	logger := &TestLogger{logs: make([]LogEntry, 0)}
+	client, err := NewClientWithLogger(logger)
+	if err != nil {
+		t.Skipf("could not bind port %d: %v", Port, err)
+	}
+	defer client.Close()
+
 	if client.logger == nil {
 		t.Error("Client logger should not be nil")
 	}
@@ -291,9 +308,11 @@ func TestNewClientForInterfaceAcceptsKnownName(t *testing.T) {
 	if err != nil || len(ifs) == 0 {
 		t.Skip("no usable interfaces")
 	}
-	c, err := NewClientForInterface(ifs[0].Name, NewNoOpLogger())
+	// Ephemeral port: this asserts the interface-name lookup and bind
+	// path, which the fixed UDAP port is not part of.
+	c, err := newClientForInterfaceWithPort(ifs[0].Name, 0, NewNoOpLogger())
 	if err != nil {
-		t.Fatalf("NewClientForInterface(%q): %v", ifs[0].Name, err)
+		t.Fatalf("newClientForInterfaceWithPort(%q): %v", ifs[0].Name, err)
 	}
 	defer c.Close()
 }
