@@ -11,6 +11,12 @@ overrides:
   # GHSA-f88m-g3jw-g9cj. Next declares ^0.34.5, so this overrides it.
   sharp@<0.35.0: ^0.35.0
   # brace-expansion (via minimatch@3) is vulnerable to a DoS from
-  # unbounded expansion (GHSA-mh99-v99m-4gvg); force past it. 5.0.8
-  # keeps a CommonJS build so minimatch's require() still resolves.
-  brace-expansion@<5.0.8: ^5.0.8
+  # unbounded expansion. The 5.0.8 pin covered GHSA-mh99-v99m-4gvg,
+  # but GHSA-rgw5-rvv9-x895 bypasses that mitigation via unbounded
+  # intermediate arrays; 5.0.9 is the fix. Still a CommonJS build, so
+  # minimatch's require() resolves.
+  brace-expansion@<5.0.9: ^5.0.9
+  # fast-uri (via ajv, under serve) treats a backslash as an authority
+  # introducer, allowing host confusion (GHSA-7p8r-x3mc-p8w7); 3.1.5
+  # is the fix for the 3.x line that ajv resolves.
+  fast-uri@<3.1.5: ^3.1.5
