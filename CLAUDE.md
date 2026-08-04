@@ -219,7 +219,7 @@ All operations take a `context.Context`; there are no timeout-based
 shim entry points. The exported surface is:
 
 ```go
-client, err := udap.NewClient()                                // bind UDP 17784 (default, 0.0.0.0)
+client, err := udap.NewClientWithLogger(logger)                 // bind UDP 17784 (default, 0.0.0.0)
 client, err := udap.NewClientForInterface("en0", logger)       // bind 0.0.0.0 + IP_BOUND_IF/SO_BINDTODEVICE → en0
 client, err := udap.NewClientForAllInterfaces(logger)          // MultiTransport fan-out over all usable interfaces
 

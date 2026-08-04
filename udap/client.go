@@ -24,12 +24,6 @@ type Client struct {
 	retries   int
 }
 
-// NewClient creates a new UDAP client bound to the standard UDAP port
-// (17784) using the default structured logger.
-func NewClient() (*Client, error) {
-	return NewClientWithLogger(NewStructuredLogger())
-}
-
 // NewClientWithLogger creates a new UDAP client bound to the standard
 // UDAP port (17784) with a custom logger.
 func NewClientWithLogger(logger Logger) (*Client, error) {
