@@ -17,6 +17,24 @@ yarn dev
 
 Open http://localhost:3000 with your browser to see the result.
 
+## Type checking
+
+```bash
+pnpm types:check
+```
+
+The step order in that script matters and is not cosmetic. `next typegen`
+loads `next.config.mjs`, which applies `createMDX()`, and the plugin
+truncates `.source/*.ts` before rewriting them — asynchronously, so the
+files can still be empty when the process exits. Anything that reads them
+afterwards then fails with `File '.source/server.ts' is not a module`,
+intermittently. Running `fumadocs-mdx` *after* `next typegen` regenerates
+them, so `tsc` always sees complete files. Do not reorder these.
+
+`next build` is unaffected: it drives the same plugin in-process and waits
+for generation, which is why CI stayed green while `pnpm types:check` did
+not.
+
 ## Explore
 
 In the project, you can see:
