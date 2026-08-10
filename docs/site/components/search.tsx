@@ -11,16 +11,7 @@ import {
   type SharedProps,
 } from 'fumadocs-ui/components/dialog/search';
 import { useDocsSearch } from 'fumadocs-core/search/client';
-import { create } from '@orama/orama';
 import { useI18n } from 'fumadocs-ui/contexts/i18n';
-
-function initOrama() {
-  return create({
-    schema: { _: 'string' },
-    // https://docs.orama.com/docs/orama-js/supported-languages
-    language: 'english',
-  });
-}
 
 // Prefix the static-search fetch URL with the site's basePath. Without
 // this the Fumadocs static client defaults to `/api/search`, which
@@ -33,7 +24,6 @@ export default function DefaultSearchDialog(props: SharedProps) {
   const { search, setSearch, query } = useDocsSearch({
     type: 'static',
     from: `${basePath}/api/search`,
-    initOrama,
     locale,
   });
 
