@@ -7,6 +7,11 @@ updates:
       interval: "weekly"
     cooldown:
       default-days: 7
+    # Pin the prefix rather than relying on Dependabot's auto-detection, so
+    # its commits satisfy commitlint now that they are no longer ignored.
+    commit-message:
+      prefix: "chore"
+      include: "scope"
     groups:
       hooks:
         patterns: ["*"]
@@ -18,6 +23,11 @@ updates:
       interval: "weekly"
     cooldown:
       default-days: 7
+    # Pin the prefix rather than relying on Dependabot's auto-detection, so
+    # its commits satisfy commitlint now that they are no longer ignored.
+    commit-message:
+      prefix: "chore"
+      include: "scope"
     groups:
       gomod-minor-patch:
         update-types: ["minor", "patch"]
@@ -29,6 +39,11 @@ updates:
       interval: "weekly"
     cooldown:
       default-days: 7
+    # Pin the prefix rather than relying on Dependabot's auto-detection, so
+    # its commits satisfy commitlint now that they are no longer ignored.
+    commit-message:
+      prefix: "chore"
+      include: "scope"
     groups:
       actions-minor-patch:
         update-types: ["minor", "patch"]
@@ -46,6 +61,11 @@ updates:
       # Next.js/fumadocs toolchain supports the native compiler.
       - dependency-name: "typescript"
         update-types: ["version-update:semver-major"]
+    # Pin the prefix rather than relying on Dependabot's auto-detection, so
+    # its commits satisfy commitlint now that they are no longer ignored.
+    commit-message:
+      prefix: "chore"
+      include: "scope"
     groups:
       docs-site-minor-patch:
         update-types: ["minor", "patch"]
