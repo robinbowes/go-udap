@@ -88,11 +88,9 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      # Fork of wagoid/commitlint-github-action: upstream is unmaintained and pins
-      # @commitlint/ensure ^19, which predates the exemption for long lines
-      # containing a URL added in v20. Dependabot bodies are markdown link lists
-      # well over 100 chars, so ^19 fails them on body-max-line-length while the
-      # pre-commit hook (v21) passes them.
+      # Fork of wagoid/commitlint-github-action. Upstream is unmaintained: no
+      # commit to master since 2025-01-14, and it pins @commitlint/ensure ^19,
+      # two majors behind. This fork runs commitlint v21 on node 24.
       - uses: yo61/commitlint-github-action@31e5e0454fc0709625e6dcfb502ea18978f45f15  # v6.3.0
         with:
           configFile: commitlint.config.mjs
