@@ -13,6 +13,20 @@ in order.
 The most boring cause. Plug it in, wait 30 seconds for it to come
 fully up, try again.
 
+### Confirm the device is in setup mode, not run mode
+
+A configured Squeezebox in run mode — front LED steady, connected to
+its music server, playing audio — does not answer UDAP at all. The
+firmware's UDAP listener exits once the device reaches the connected
+state, so `discover` sees nothing even though the device is on the
+network and answering pings.
+
+Short-press the front button to drop it into setup mode (the LED
+flashes red). NVRAM is preserved, and UDAP starts responding again.
+
+See [Setup mode vs. run mode](../concepts/setup-vs-run-mode.mdx) for
+the evidence behind this and the model-coverage caveat.
+
 ### Confirm the device is on the same network segment
 
 UDAP discovery is broadcast-based; broadcasts don't cross routers.
