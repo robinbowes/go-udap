@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.8](https://github.com/yo61/go-udap/compare/v2.4.7...v2.4.8) (2026-09-04)
+
+
+### Dependencies
+
+* bump github/codeql-action/upload-sarif ([#209](https://github.com/yo61/go-udap/issues/209)) ([26b5ec9](https://github.com/yo61/go-udap/commit/26b5ec9b5febbeb024cea51486d92a27eea4c926))
+* bump github/codeql-action/upload-sarif ([#212](https://github.com/yo61/go-udap/issues/212)) ([ca5ea12](https://github.com/yo61/go-udap/commit/ca5ea122970585717ca1286f82eb23bc8d491a7f))
+* bump the docs-site-minor-patch group in /docs/site with 5 updates ([#206](https://github.com/yo61/go-udap/issues/206)) ([8486fda](https://github.com/yo61/go-udap/commit/8486fda1dd745bf4dfd635e4b9784441eeb8c500))
+* bump the docs-site-minor-patch group in /docs/site with 5 updates ([#208](https://github.com/yo61/go-udap/issues/208)) ([df65a89](https://github.com/yo61/go-udap/commit/df65a89a59245fa0947eb9130c53f251f2c3d723))
+* bump the docs-site-minor-patch group in /docs/site with 5 updates ([#211](https://github.com/yo61/go-udap/issues/211)) ([55306ba](https://github.com/yo61/go-udap/commit/55306bad51d18eb3a7d502b332b18928bc6551d1))
+* force fast-uri past high advisories and bump Go to 1.27.1 ([#213](https://github.com/yo61/go-udap/issues/213)) ([51ec6f4](https://github.com/yo61/go-udap/commit/51ec6f49a5966c6f01265a41e7ccbb233f4daefd))
+
 ## [2.4.7](https://github.com/yo61/go-udap/compare/v2.4.6...v2.4.7) (2026-07-22)
 
 
