@@ -96,3 +96,34 @@ context wrap chain)
 ## Source: CLAUDE.md "Cross-Platform Support"
 
 ## Last triggered: never
+
+---
+
+## Category: Supply-chain scan findings
+
+## Criteria:
+
+    - Every entry in docs/site/pnpm-workspace.yaml overrides names the
+      advisory (or advisories) it mitigates and the version that fixes
+      them. A package already listed there is a likely repeat offender,
+      not a solved problem: `pkg@<X: ^X` is a floor, not a ceiling, and
+      does nothing once X itself is found vulnerable.
+    - Before trusting a post-fix clean scan, the PRE-fix tree is scanned
+      and the finding confirmed to reproduce, and `grype db status`
+      matches the DB build the failing CI run logged. Grype scans with a
+      stale DB and reports "No vulnerabilities found" after only a WARN,
+      so a clean result on its own is not evidence.
+    - govulncheck findings are verified with the toolchain pinned
+      (`GOTOOLCHAIN=goX.Y.Z`), never the local default. CI installs the
+      exact go.mod directive, so a newer local toolchain masks the
+      alerts CI reports.
+    - When a stdlib alert is open in the Security tab, go.mod's go
+      directive is moved to a release that fixes it.
+
+## Severity: warning
+
+## Source: PR #213 (fast-uri re-pin + Go 1.27.1); recurring across #115, #129, #171, #179, #188
+
+## Last triggered: 2026-09-04 (#213 — four highs landed on fast-uri
+3.1.5, which was already the pinned floor; a stale grype DB also
+returned a false all-clear on the unfixed tree)
