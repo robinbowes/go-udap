@@ -145,10 +145,25 @@ homebrew_casks:
       - share/man/man1/go-udap-read.1
       - share/man/man1/go-udap-reboot.1
       - share/man/man1/go-udap-set.1
-    hooks:
-      post:
-        install: |
-          system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/go-udap"] if OS.mac?
+    # Strip the Gatekeeper quarantine xattr so the unsigned binary runs.
+    #
+    # Homebrew deprecated the imperative `postflight` stanza in favour of the
+    # declarative `postflight_steps` DSL, but GoReleaser's hooks.post.install
+    # still renders `postflight do`. So the stanza is emitted verbatim through
+    # custom_block, which GoReleaser writes directly after the `cask ... do`
+    # line; the tap's bump-go-udap.yaml runs `brew style --fix` on the rendered
+    # cask, which moves it to the position Cask/StanzaOrder wants.
+    #
+    # `{{staged_path}}` is a Homebrew install-step token expanded at install
+    # time, not a GoReleaser one. The backticked raw string escapes it so
+    # GoReleaser emits the braces literally instead of failing on an undefined
+    # template function.
+    custom_block: |
+      postflight_steps do
+        on_macos do
+          run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{ `{{staged_path}}` }}/go-udap"]
+        end
+      end
 
 changelog:
   use: github
