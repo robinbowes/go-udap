@@ -50,7 +50,7 @@ jobs:
       # syft, so we install it explicitly. download-syft drops the
       # binary on $PATH without running anchore/sbom-action's own SBOM
       # step (goreleaser owns the per-archive cataloging).
-      - uses: anchore/sbom-action/download-syft@e22c389904149dbc22b58101806040fa8d37a610  # v0.24.0
+      - uses: anchore/sbom-action/download-syft@3ad7283483fc7af8ff2b4ea19663c2d5ca935e26  # v0.24.2
 
       # GoReleaser reuses release-please's existing draft (see
       # .goreleaser.yaml: use_existing_draft) and publishes it in a
