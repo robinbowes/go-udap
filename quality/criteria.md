@@ -127,3 +127,32 @@ context wrap chain)
 ## Last triggered: 2026-09-04 (#213 — four highs landed on fast-uri
 3.1.5, which was already the pinned floor; a stale grype DB also
 returned a false all-clear on the unfixed tree)
+
+---
+
+## Category: Generated packaging
+
+## Criteria:
+
+    - A change to how the Homebrew cask is generated is verified by an
+      actual `goreleaser release --snapshot` render, then `brew style
+      --fix` and `brew style` over the rendered file — never by reading
+      `.goreleaser.yaml` and reasoning about the output. GoReleaser
+      templates every `homebrew_casks` string field, so literal `{{...}}`
+      in a cask stanza fails the release unless escaped.
+    - Any stanza the cask relies on is proven to *execute*, not merely to
+      parse: install the cask, and confirm a deliberately broken variant
+      fails. `brew style` passing says nothing about runtime.
+    - Homebrew cask cops and DSL deprecations move independently of this
+      repo. When a `brew` command warns about the cask, fix the generator
+      in `.goreleaser.yaml` as well as the tap's checked-in copy —
+      regenerating on the next release leaves the tap's daily sweep red
+      until then.
+
+## Severity: warning
+
+## Source: decision 2026-09-05-cask-postflight-steps (postflight →
+postflight_steps deprecation)
+
+## Last triggered: 2026-09-05 (`postflight` deprecated; `brew style --fix`
+could not autocorrect it, so the tap's daily sweep failed)
